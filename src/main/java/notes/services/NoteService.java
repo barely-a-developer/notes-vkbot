@@ -56,8 +56,10 @@ public class NoteService {
     private PhotoDto createPhotoDto(Photo photo) {
         log.info("Translating the Photo attachment");
         PhotoSizes photoSizes = findUrlByPhotoSizeType(photo);
-        StorageFileDto storageFileDto = savePhotoToStorage(photoSizes.getUrl());
+        URL url = photoSizes.getUrl();
+        StorageFileDto storageFileDto = savePhotoToStorage(url);
         return PhotoDto.builder()
+                       .originalUrl(url.toString())
                        .width(photoSizes.getWidth())
                        .height(photoSizes.getHeight())
                        .storageId(storageFileDto.getStorageId())
