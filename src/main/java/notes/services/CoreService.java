@@ -3,13 +3,13 @@ package notes.services;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import notes.clients.NotesCoreClient;
-import notes.models.NoteDto;
+import notes.models.dto.NoteDto;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
-public class NotesCoreService {
+public class CoreService {
 
     private final NotesCoreClient notesCoreClient;
 

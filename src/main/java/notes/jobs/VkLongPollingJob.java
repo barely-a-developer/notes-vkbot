@@ -33,6 +33,7 @@ public class VkLongPollingJob {
     @PostConstruct
     private void startNewSession() {
         LongPollServer longPollServer = getLongPollServer();
+        // TODO Needs to use the last TS requested -- save to DB each time its updated
         ts = longPollServer.getTs();
         key = longPollServer.getKey();
         server = longPollServer.getServer();
@@ -44,7 +45,7 @@ public class VkLongPollingJob {
         log.debug("Long Poll Request Job Started");
         GetLongPollEventsResponse eventsResponse = getLongPollEventsResponse();
         for (JsonObject jsonObject : eventsResponse.getUpdates()) {
-            vkService.processMessage(jsonObject);
+            vkService.handleVkEvent(jsonObject);
         }
         ts = eventsResponse.getTs().toString();
         log.debug("Long Poll Request Job Finished");

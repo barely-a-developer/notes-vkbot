@@ -5,8 +5,10 @@ import com.vk.api.sdk.client.VkApiClient;
 import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class VkConfig {
@@ -33,4 +35,8 @@ public class VkConfig {
         return new GroupActor(groupId, accessToken);
     }
 
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplateBuilder().build();
+    }
 }
